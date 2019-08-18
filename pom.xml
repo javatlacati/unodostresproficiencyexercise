@@ -57,6 +57,12 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.8</version>
+        </dependency>
+
 <!--        <dependency>-->
 <!--            <groupId>org.junit.platform</groupId>-->
 <!--            <artifactId>junit-platform-console</artifactId>-->
@@ -99,6 +105,9 @@
                     <includes>
                         <include>**/*UserHistoryRunner.java</include>
                     </includes>
+<!--                    <parallel>all</parallel>-->
+<!--                    <useUnlimitedThreads>true</useUnlimitedThreads>-->
+<!--                    <perCoreThreadCount>true</perCoreThreadCount>-->
                 </configuration>
             </plugin>
             <plugin>
