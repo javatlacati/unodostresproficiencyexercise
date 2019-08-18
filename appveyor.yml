@@ -13,7 +13,7 @@ build_script:
 
   # verify artifacts
 test_script:
-  - mvn verify -B -q
+  - mvn verify -B
 
 cache:
   - C:\Users\appveyor\.m2
