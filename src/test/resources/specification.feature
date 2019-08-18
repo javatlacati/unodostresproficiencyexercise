@@ -5,7 +5,7 @@ Feature: Automation Engineer Proficiency Exercise
   #The exercise will be evaluated on coding style, understanding of programming concepts, choice of techniques and
   # quality of the final product.
 
-  Scenario: Basic
+  Scenario: Basic on Chrome
     Given I open the broser 'Chrome'
     Then I go to home page
     Then  under recarga celluar select operator as 'Telcel' from operador field

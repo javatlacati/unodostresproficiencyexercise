@@ -32,7 +32,7 @@ public class MyStepdefs {
         home = PageFactory.initElements(driver, Home.class);
     }
 
-    @Given("I open the broser \'([A-Za-z ]+)\'")
+    @Given("^I open the broser \'([A-Za-z ]+)\'$")
     public void iOpenTheBroserSpecified(String browserName) {
         String lower = browserName.toLowerCase();
         switch (lower) {
@@ -57,17 +57,17 @@ public class MyStepdefs {
 
     @And("^Give this number ([\\d]+) under numero de celluar field$")
     public void giveThisNumberUnderNumeroDeCelluarField(String telephone) {
-        home.selectTelephoneNumber(driver, telephone);
+        home.specifyTelephoneNumber(driver, telephone);
     }
 
     @And("^under  monte de recharga select (\\d+) dollar normal recharge$")
     public void underMonteDeRechargaSelectDollarNormalRecharge(int mount) {
-
+        home.selectRechargeAmount(driver,mount);
     }
 
     @And("^click on siguiente$")
     public void clickOnSiguiente() {
-
+        home.clickRefillNextButton(driver);
     }
 
     @Then("^Verify if the user able to reach to the next screen or not\\(Payment screen\\)$")
