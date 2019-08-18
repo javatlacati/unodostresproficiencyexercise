@@ -6,7 +6,8 @@ Feature: Automation Engineer Proficiency Exercise
   # quality of the final product.
 
   Scenario: Basic
-    Given I go to home page
+    Given I open the broser 'Chrome'
+    Then I go to home page
     Then  under recarga celluar select operator as 'Telcel' from operador field
     And Give this number 5523261151 under numero de celluar field
     And under  monte de recharga select 10 dollar normal recharge

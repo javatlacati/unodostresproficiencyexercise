@@ -13,6 +13,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -24,19 +25,27 @@ public class MyStepdefs {
     Home home;
 
     public MyStepdefs() {
-        String path = "/ambiente/chromedriver.exe";
-        System.out.println(path);
-        System.setProperty("webdriver.chrome.driver", path);
-        driver = new ChromeDriver();
+//        String path = "/Tools/WebDriver/chromedriver.exe";
+//        System.out.println(path);
+//        System.setProperty("webdriver.chrome.driver", path);
+
         home = PageFactory.initElements(driver, Home.class);
     }
 
-    //    @Before
-//    public void setUp() throws Exception {
-//
-//    }
+    @Given("I open the broser \'([A-Za-z ]+)\'")
+    public void iOpenTheBroserSpecified(String browserName) {
+        String lower = browserName.toLowerCase();
+        switch (lower) {
+            case "chrome":
+                driver = new ChromeDriver();
+                break;
+            case "firefox":
+                driver = new FirefoxDriver();
+                break;
+        }
+    }
 
-    @Given("^I go to home page$")
+    @Then("^I go to home page$")
     public void iGoToHomePage() {
         home.go(driver);
     }
