@@ -43,7 +43,7 @@ public class MyStepdefs {
 
     @Then("^under recarga celluar select operator as '([A-Za-z&]+)' from operador field$")
     public void underRecargaCelluarSelectOperatorAsTelecelFromOperadorField(String operator) {
-        home.selectOperator(driver,operator);
+        home.selectOperator(driver, operator);
     }
 
     @And("^Give this number ([\\d]+) under numero de celluar field$")
@@ -83,6 +83,6 @@ public class MyStepdefs {
 
     @And("^verify if the recharge is success or not$")
     public void verifyIfTheRechargeIsSuccessOrNot() {
-
+        driver.close();
     }
 }

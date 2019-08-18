@@ -96,6 +96,9 @@
                 <configuration>
                     <!-- We run integration tests with failsafe! -->
 <!--                    <skip>true</skip>-->
+                    <includes>
+                        <include>**/*UserHistoryRunner.java</include>
+                    </includes>
                 </configuration>
             </plugin>
             <plugin>
