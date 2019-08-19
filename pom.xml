@@ -105,9 +105,9 @@
                     <includes>
                         <include>**/*UserHistoryRunner.java</include>
                     </includes>
-<!--                    <parallel>all</parallel>-->
-<!--                    <useUnlimitedThreads>true</useUnlimitedThreads>-->
-<!--                    <perCoreThreadCount>true</perCoreThreadCount>-->
+                    <parallel>all</parallel>
+                    <useUnlimitedThreads>true</useUnlimitedThreads>
+                    <perCoreThreadCount>true</perCoreThreadCount>
                 </configuration>
             </plugin>
             <plugin>
