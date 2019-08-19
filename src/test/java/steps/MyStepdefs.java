@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -59,6 +60,9 @@ public class MyStepdefs {
                 break;
             case "firefox":
                 driver = new FirefoxDriver();
+                break;
+            case "internet explorer":
+                driver = new InternetExplorerDriver();
                 break;
         }
         home = PageFactory.initElements(driver, Home.class);

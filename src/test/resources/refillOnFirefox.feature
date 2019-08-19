@@ -5,13 +5,14 @@ Feature: Automation Engineer Proficiency Exercise
   #The exercise will be evaluated on coding style, understanding of programming concepts, choice of techniques and
   # quality of the final product.
 
-  Scenario: Basic Movistar Refill on Chrome
-    Given I open the broser 'Chrome'
+  Scenario: Basic Telcel Refill on Firefox
+    Given I open the broser 'Firefox'
     Then I go to home page
-    Then  under recarga celluar select operator as 'Movistar' from operador field
-    And Give this number 6623003032 under numero de celluar field
+    Then  under recarga celluar select operator as 'Telcel' from operador field
+    And Give this number 5523261151 under numero de celluar field
     And under  monte de recharga select 10 dollar normal recharge
     And click on siguiente
+    And accept warning
     Then Verify if the user able to reach to the next screen or not(Payment screen)
     Then On payment screen click on tarjeta
     Then enter the following details
