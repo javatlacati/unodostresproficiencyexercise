@@ -6,11 +6,15 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -28,7 +32,6 @@ public class MyStepdefs {
      * Selenium web Driver instance to use
      */
     private WebDriver driver;
-    private WebDriverWait wait;
 
     /**
      * Home page
@@ -104,10 +107,9 @@ public class MyStepdefs {
 
     @Then("^enter the following details$")
     public void enterTheFollowingDetails(DataTable table) {
+        WebDriverWait wait = new WebDriverWait(driver, 3);
+        wait.withTimeout(3, TimeUnit.SECONDS).until(ExpectedConditions.elementToBeClickable(By.id("payment-form")));
         table.asMaps()
-//                .stream()
-//                .skip(1) //skip the title of the table
-//                .parallel() //fill the fields in any order
                 .forEach(row ->
                         row.forEach(
                                 (fieldName, fieldVale) ->

@@ -25,6 +25,7 @@ public class Home {
     private WebElement refillNextButton;
 
     public void go(WebDriver driver) {
+        driver.manage().deleteAllCookies();
         driver.get(URL);
     }
 

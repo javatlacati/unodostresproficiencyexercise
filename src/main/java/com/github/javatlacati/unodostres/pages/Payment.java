@@ -39,22 +39,22 @@ public class Payment {
                 creditCardSection.setCreditCardName(driver, fieldValue);
                 break;
             case "card number":
-                creditCardSection.setCardNumber(driver, fieldValue);
+                creditCardSection.setCardNumber(fieldValue);
                 break;
             case "month":
-                creditCardSection.setMonth(driver, fieldValue);
+                creditCardSection.setMonth(fieldValue);
                 break;
             case "date":
-                creditCardSection.setDate(driver, fieldValue);
+                creditCardSection.setDate(fieldValue);
                 break;
             case "cvv":
-                creditCardSection.setCvv(driver, fieldValue);
+                creditCardSection.setCvv(fieldValue);
                 break;
             case "correo electronico":
-                creditCardSection.setEmail(driver, fieldValue);
+                creditCardSection.setEmail(fieldValue);
                 break;
             default:
-                throw new NoSuchFieldException("the specified field is not  standard field for this section");
+                throw new NoSuchFieldException("the specified field is not  standard field for this section (" + loweredFieldName + "," + fieldValue + ")");
         }
     }
 
