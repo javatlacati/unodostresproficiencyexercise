@@ -1,12 +1,7 @@
 package steps;
 
 import com.github.javatlacati.unodostres.pages.Home;
-//import cucumber.annotation.en.And;
-//import cucumber.annotation.en.Given;
-//import cucumber.annotation.en.Then;
-//import cucumber.api.java.en.And;
-//import cucumber.api.java.en.Given;
-//import cucumber.api.java.en.Then;
+import com.github.javatlacati.unodostres.pages.Payment;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -17,20 +12,40 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+//import cucumber.annotation.en.And;
+//import cucumber.annotation.en.Given;
+//import cucumber.annotation.en.Then;
+//import cucumber.api.java.en.And;
+//import cucumber.api.java.en.Given;
+//import cucumber.api.java.en.Then;
+
 public class MyStepdefs {
 
+    /**
+     * Selenium web Driver instance to use
+     */
     private WebDriver driver;
     private WebDriverWait wait;
 
-    Home home;
+    /**
+     * Home page
+     */
+    private Home home;
+    /**
+     * Pament page
+     */
+    private Payment payment;
 
-    public MyStepdefs() {
+//    public MyStepdefs() {
 //        String path = "/Tools/WebDriver/chromedriver.exe";
 //        System.out.println(path);
 //        System.setProperty("webdriver.chrome.driver", path);
 
-        home = PageFactory.initElements(driver, Home.class);
-    }
+
+//    }
 
     @Given("^I open the broser \'([A-Za-z ]+)\'$")
     public void iOpenTheBroserSpecified(String browserName) {
@@ -43,6 +58,7 @@ public class MyStepdefs {
                 driver = new FirefoxDriver();
                 break;
         }
+        home = PageFactory.initElements(driver, Home.class);
     }
 
     @Then("^I go to home page$")
@@ -57,37 +73,59 @@ public class MyStepdefs {
 
     @And("^Give this number ([\\d]+) under numero de celluar field$")
     public void giveThisNumberUnderNumeroDeCelluarField(String telephone) {
-        home.specifyTelephoneNumber(driver, telephone);
+        home.specifyTelephoneNumber(telephone);
     }
 
     @And("^under  monte de recharga select (\\d+) dollar normal recharge$")
     public void underMonteDeRechargaSelectDollarNormalRecharge(int mount) {
-        home.selectRechargeAmount(driver,mount);
+        home.selectRechargeAmount(driver, mount);
     }
 
     @And("^click on siguiente$")
     public void clickOnSiguiente() {
-        home.clickRefillNextButton(driver);
+        home.clickRefillNextButton();
+    }
+
+    @And("accept warning")
+    public void acceptWarning() {
+        home.acceptRefillWarning(driver);
     }
 
     @Then("^Verify if the user able to reach to the next screen or not\\(Payment screen\\)$")
     public void verifyIfTheUserAbleToReachToTheNextScreenOrNotPaymentScreen() {
-
+        payment = PageFactory.initElements(driver, Payment.class);
+        assertEquals(payment.getURL(), driver.getCurrentUrl());
     }
 
-    @Then("^On payment screen click on tarjeta$")
-    public void onPaymentScreenClickOnTarjeta() {
-
+    @Then("^On payment screen click on ([A-Za-z ]+)$")
+    public void onPaymentScreenClickOnTarjeta(String paymentOption) {
+        payment.selectPaymentType(driver, paymentOption);
     }
 
     @Then("^enter the following details$")
     public void enterTheFollowingDetails(DataTable table) {
-
+        table.asMaps()
+//                .stream()
+//                .skip(1) //skip the title of the table
+//                .parallel() //fill the fields in any order
+                .forEach(row ->
+                        row.forEach(
+                                (fieldName, fieldVale) ->
+                                {
+                                    try {
+                                        payment.enterCreditCardField(driver, fieldName, fieldVale);
+                                    } catch (NoSuchFieldException e) {
+                                        e.printStackTrace();
+                                        fail(e.getMessage() + ":" + fieldName);
+                                    }
+                                }
+                        )
+                );
     }
 
     @Then("^Click on pagar con tarjeta to do the recharge$")
     public void clickOnPagarConTarjetaToDoTheRecharge() {
-
+        payment.clickPayWithCard(driver);
     }
 
     @And("^verify if the recharge is success or not$")

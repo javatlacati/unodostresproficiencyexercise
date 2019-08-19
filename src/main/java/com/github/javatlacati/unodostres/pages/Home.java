@@ -6,52 +6,74 @@
 package com.github.javatlacati.unodostres.pages;
 
 import com.github.javatlacati.unodostres.pages.elements.PageElement;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 /**
  * @author Ruslan López Carro <scherzo16 at gmail.com>
  */
 public class Home {
     private final String URL = "http://prueba.undostres.com.mx";
-    private PageElement operatorInputField = new PageElement("//div[@class='field']/div/input"); //it can be also //div[@class='form']/ul/li[1]/div/div/input
-    private PageElement telephoneInputField = new PageElement("//div[@class='form']/ul/li[2]/div/div/input");
-    private PageElement rechargeAmountInputField = new PageElement("//div[@class='form']/ul/li[3]/div/div/input");
-    private PageElement refillNextButton = new PageElement("//div[@class='next']/button[@class='button buttonRecharge']");
+    @FindBy(xpath = "//div[@class='field']/div/input") //it can be also //div[@class='form']/ul/li[1]/div/div/input
+    private WebElement operatorInputField;
+    @FindBy(xpath = "//div[@class='form']/ul/li[2]/div/div/input")
+    private WebElement telephoneInputField;
+    @FindBy(xpath = "//div[@class='form']/ul/li[3]/div/div/input")
+    private WebElement rechargeAmountInputField;
+    @FindBy(xpath = "//div[@class='next']/button[@class='button buttonRecharge']")
+    private WebElement refillNextButton;
 
     public void go(WebDriver driver) {
         driver.get(URL);
     }
 
     public void selectOperator(WebDriver driver, String operator) {
-        WebElement inputField = operatorInputField.getWebElementByXpath(driver);
-        inputField.click();
-        PageElement operatorFloatingMenu = new PageElement();
-        operatorFloatingMenu.setXpathReference("//div[@class='suggestion']/ul/li/a[contains(string(), \"" + operator + "\")]");
+        operatorInputField.click();
+        PageElement operatorFloatingMenu =
+                PageElement
+                        .builder()
+                        .xpathReference("//div[@class='suggestion']/ul/li/a[contains(string(), \"" + operator + "\")]")
+                        .build();
         WebElement inputOption = operatorFloatingMenu.getWebElementByXpath(driver);
         inputOption.click();
     }
 
-    public void specifyTelephoneNumber(WebDriver driver, String telephone) {
-        WebElement inputField = telephoneInputField.getWebElementByXpath(driver);
-        inputField.click();
-        inputField.sendKeys(telephone);
+    public void specifyTelephoneNumber(String telephone) {
+        telephoneInputField.click();
+        telephoneInputField.sendKeys(telephone);
     }
 
     public void selectRechargeAmount(WebDriver driver, int mount) {
-        WebElement inputField = rechargeAmountInputField.getWebElementByXpath(driver);
-        inputField.click();
-        PageElement rechargeAmountFloatingMenuTab = new PageElement("//div[@class=\"suggestion\"]/div/div[contains(string(),'Recarga Saldo')]");
+        rechargeAmountInputField.click();
+        PageElement rechargeAmountFloatingMenuTab =
+                PageElement
+                        .builder()
+                        .xpathReference("//div[@class=\"suggestion\"]/div/div[contains(string(),'Recarga Saldo')]")
+                        .build();
         WebElement tab = rechargeAmountFloatingMenuTab.getWebElementByXpath(driver);
         tab.click();
-        PageElement rechargeAmountOption = new PageElement("//li[@data-name=\"" + mount + "\"]/a");// //div[@class='suggestion']/ul[2]/li[@data-name="10"]/a
+        PageElement rechargeAmountOption =
+                PageElement
+                        .builder()
+                        .xpathReference("//li[@data-name=\"" + mount + "\"]/a")// //div[@class='suggestion']/ul[2]/li[@data-name="10"]/a
+                        .build();
         WebElement rechargeAmountItem = rechargeAmountOption.getWebElementByXpath(driver);
         rechargeAmountItem.click();
     }
 
-    public void clickRefillNextButton(WebDriver driver) {
-        WebElement nextButton = refillNextButton.getWebElementByXpath(driver);
-        nextButton.click();
+    public void clickRefillNextButton() {
+        refillNextButton.click();
+    }
+
+    public void acceptRefillWarning(WebDriver driver) {
+        PageElement buttonOnWarningMessage =
+                PageElement
+                        .builder()
+                        .xpathReference("//div[@class='modal-dialog']/div/div/button[contains(string(),'Continuar')]")
+                        .build();
+
+        WebElement continueButton = buttonOnWarningMessage.getWebElementByXpathWithWait(driver);
+        continueButton.click();
     }
 }

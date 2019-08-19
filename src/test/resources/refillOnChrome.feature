@@ -12,10 +12,10 @@ Feature: Automation Engineer Proficiency Exercise
     And Give this number 5523261151 under numero de celluar field
     And under  monte de recharga select 10 dollar normal recharge
     And click on siguiente
+    And accept warning
     Then Verify if the user able to reach to the next screen or not(Payment screen)
     Then On payment screen click on tarjeta
     Then enter the following details
-      | Field              | Value            |
       | card name          | Test             |
       | Card number        | 4111111111111111 |
       | month              | 11               |
