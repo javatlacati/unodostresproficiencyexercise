@@ -11,6 +11,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
+ * Abstraction that holds data and available operations on the site home page.
+ *
  * @author Ruslan López Carro <scherzo16 at gmail.com>
  */
 public class Home {

@@ -59,9 +59,15 @@ public class MyStepdefs {
             case "chrome":
                 driver = new ChromeDriver();
                 break;
-            case "firefox":
-                driver = new FirefoxDriver();
+            case "firefox": {
+                DesiredCapabilities dc = new DesiredCapabilities();
+                dc.setCapability("marionette", false);
+//                FirefoxOptions opt = new FirefoxOptions();
+//                opt.merge(dc);
+                driver = new FirefoxDriver(dc);
                 break;
+            }
+
             case "internet explorer":
                 DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
                 capabilities.setCapability("ie.ensureCleanSession", true);

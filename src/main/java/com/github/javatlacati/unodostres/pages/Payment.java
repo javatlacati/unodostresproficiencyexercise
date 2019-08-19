@@ -7,6 +7,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+/**
+ * Abstraction that holds data and available operations on the site payment page.
+ *
+ * @author Ruslan López Carro <scherzo16 at gmail.com>
+ */
 public class Payment {
     @Getter
     private final String URL;
