@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -62,7 +63,9 @@ public class MyStepdefs {
                 driver = new FirefoxDriver();
                 break;
             case "internet explorer":
-                driver = new InternetExplorerDriver();
+                DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+                capabilities.setCapability("ie.ensureCleanSession", true);
+                driver = new InternetExplorerDriver(capabilities);
                 break;
         }
         home = PageFactory.initElements(driver, Home.class);
